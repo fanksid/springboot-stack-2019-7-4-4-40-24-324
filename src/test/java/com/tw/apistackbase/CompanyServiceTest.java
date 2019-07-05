@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -22,10 +21,9 @@ public class CompanyServiceTest {
 
     @Test
     void should_return_all_company_when_get_all() {
-        List<Company> companies = companyService.getAll();
+        List<Company> companies = companyService.getAll(null, null);
 
         assertNotNull(companies);
-        assertFalse(companies.isEmpty());
         assertEquals(2, companies.size());
     }
 
@@ -50,5 +48,14 @@ public class CompanyServiceTest {
 
         assertNotNull(employees);
         assertEquals(3, employees.size());
+    }
+
+    @Test
+    void should_return_companies_when_get_all_with_page_and_size() {
+        List<Company> companies = companyService.getAll(1, 1);
+
+        assertNotNull(companies);
+        assertEquals(1, companies.size());
+        assertEquals("alibaba", companies.get(0).getCompanyName());
     }
 }

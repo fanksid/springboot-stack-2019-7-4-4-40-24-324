@@ -11,15 +11,27 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CompanyService {
-    private static final List<Company> COMPANY = new ArrayList<Company>(){{
+    private static final List<Company> COMPANY = new ArrayList<Company>() {{
         Company alibaba = new Company(1, "alibaba", 200, Employee.generateAliEmployees());
         Company tengxun = new Company(2, "tengxun", 200, Employee.generateTengxunEmployees());
         add(alibaba);
         add(tengxun);
     }};
 
-    public List<Company> getAll() {
+    public List<Company> getAll(Integer page, Integer pageSize) {
+        if (Objects.nonNull(page) && Objects.nonNull(pageSize)) {
+            int start = pageSize * (page - 1);
+            int end = pageSize * page;
+            return COMPANY.subList(getMax(start), getMax(end));
+        }
         return COMPANY;
+    }
+
+    private int getMax(int number) {
+        if (number >= COMPANY.size() - 1) {
+            return COMPANY.size() - 1;
+        }
+        return number;
     }
 
     public Company getById(Integer id) {
