@@ -1,6 +1,7 @@
 package com.tw.apistackbase.controller;
 
 import com.tw.apistackbase.model.Company;
+import com.tw.apistackbase.model.Employee;
 import com.tw.apistackbase.service.CompanyService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,11 @@ public class CompanyController {
     public ResponseEntity<Company> getById(@PathVariable Integer id) {
         Company company = companyService.getById(id);
         return ResponseEntity.ok(company);
+    }
+
+    @GetMapping(path = "/{id}/employees", produces = {"application/json"})
+    public ResponseEntity<List<Employee>> getEmployeesByCompanyId(@PathVariable Integer id) {
+        List<Employee> employees = companyService.getEmployeesByCompanyId(id);
+        return ResponseEntity.ok(employees);
     }
 }

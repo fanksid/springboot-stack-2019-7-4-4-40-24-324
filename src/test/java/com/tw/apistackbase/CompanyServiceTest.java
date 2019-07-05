@@ -1,6 +1,7 @@
 package com.tw.apistackbase;
 
 import com.tw.apistackbase.model.Company;
+import com.tw.apistackbase.model.Employee;
 import com.tw.apistackbase.service.CompanyService;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -41,5 +42,13 @@ public class CompanyServiceTest {
         Company company = companyService.getById(101);
 
         assertNull(company);
+    }
+
+    @Test
+    void should_return_companys_employees_by_company_id() {
+        List<Employee> employees = companyService.getEmployeesByCompanyId(1);
+
+        assertNotNull(employees);
+        assertEquals(3, employees.size());
     }
 }
