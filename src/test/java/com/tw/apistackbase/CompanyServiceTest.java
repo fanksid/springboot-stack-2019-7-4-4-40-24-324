@@ -3,6 +3,7 @@ package com.tw.apistackbase;
 import com.tw.apistackbase.model.Company;
 import com.tw.apistackbase.model.Employee;
 import com.tw.apistackbase.service.CompanyService;
+import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -57,5 +58,17 @@ public class CompanyServiceTest {
         assertNotNull(companies);
         assertEquals(1, companies.size());
         assertEquals("alibaba", companies.get(0).getCompanyName());
+    }
+
+    @Test
+    void should_add_new_company_when_company_is_valid() {
+        Company meituan = new Company(3, "meituan", 100, Collections.emptyList());
+
+        companyService.addCompany(meituan);
+
+        List<Company> companies = companyService.getAll(null, null);
+        assertNotNull(companies);
+        assertEquals(3, companies.size());
+        assertEquals("meituan", companies.get(2).getCompanyName());
     }
 }

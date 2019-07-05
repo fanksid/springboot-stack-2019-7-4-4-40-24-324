@@ -1,6 +1,5 @@
 package com.tw.apistackbase.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 
 public class Company {
@@ -12,6 +11,9 @@ public class Company {
 
     private List<Employee> employees;
 
+    public Company() {
+    }
+
     public Company(Integer id, String companyName, Integer employeesNumber, List<Employee> employees) {
         this.id = id;
         this.companyName = companyName;
@@ -19,7 +21,6 @@ public class Company {
         this.employees = employees;
     }
 
-    @JsonIgnore
     public Integer getId() {
         return id;
     }

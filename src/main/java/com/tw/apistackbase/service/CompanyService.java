@@ -46,4 +46,14 @@ public class CompanyService {
         }
         return company.getEmployees();
     }
+
+    public void addCompany(Company company) {
+        Company matched = getById(company.getId());
+        if (Objects.isNull(matched)) {
+            COMPANY.add(company);
+            return;
+        }
+
+        throw new RuntimeException("Already exist company!");
+    }
 }
