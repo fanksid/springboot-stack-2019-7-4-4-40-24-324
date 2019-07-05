@@ -4,6 +4,7 @@ import com.tw.apistackbase.model.Company;
 import com.tw.apistackbase.model.Employee;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,5 +18,10 @@ public class CompanyService {
 
     public List<Company> getAll() {
         return COMPANY;
+    }
+
+    public Company getById(Integer id) {
+        Optional<Company> company = COMPANY.stream().filter(c -> id.equals(c.getId())).findAny();
+        return company.orElse(null);
     }
 }

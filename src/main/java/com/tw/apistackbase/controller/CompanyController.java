@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,5 +21,11 @@ public class CompanyController {
     public ResponseEntity<List<Company>> getAll() {
         List<Company> companies = companyService.getAll();
         return ResponseEntity.ok(companies);
+    }
+
+    @GetMapping(path = "/{id}", produces = {"application/json"})
+    public ResponseEntity<Company> getById(@PathVariable Integer id) {
+        Company company = companyService.getById(id);
+        return ResponseEntity.ok(company);
     }
 }
