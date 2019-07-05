@@ -71,4 +71,17 @@ public class CompanyServiceTest {
         assertEquals(3, companies.size());
         assertEquals("meituan", companies.get(2).getCompanyName());
     }
+
+    @Test
+    void should_update_company_successful_when_update_with_id_company() {
+        Company alibaba = new Company(1, "alibaba", 100, Collections.emptyList());
+
+        companyService.updateCompany(1, alibaba);
+
+        List<Company> companies = companyService.getAll(null, null);
+        assertNotNull(companies);
+        assertEquals(2, companies.size());
+        assertEquals("alibaba", companies.get(0).getCompanyName());
+        assertEquals(100, companies.get(0).getEmployeesNumber().intValue());
+    }
 }

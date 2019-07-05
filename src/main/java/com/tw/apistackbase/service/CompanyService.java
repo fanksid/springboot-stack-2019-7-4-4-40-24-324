@@ -56,4 +56,14 @@ public class CompanyService {
 
         throw new RuntimeException("Already exist company!");
     }
+
+    public void updateCompany(Integer id, Company company) {
+        Company matched = getById(id);
+        if (Objects.isNull(matched)) {
+            throw new RuntimeException("No company found!");
+        }
+        int index = COMPANY.indexOf(matched);
+        COMPANY.remove(matched);
+        COMPANY.add(index, company);
+    }
 }
